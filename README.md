@@ -4,7 +4,7 @@ Checks the estimated delivery date for your Tesla order.
 
 ## Getting Started
 
-After cloning the repo, create an environment variable file `.env` with a restrictive file permissions for the following variables
+After cloning the repo, create an environment variable file `.env` with a restrictive file permissions for the following variables:
 <pre>
 EMAIL="your-email-address"
 CREDENTIAL="your-tesla-account-credential"

@@ -4,10 +4,15 @@ from requests import Session
 from bs4 import BeautifulSoup as bs
 from dotenv import load_dotenv
 
+import sys
+from email.mime.text import MIMEText
+from subprocess import Popen, PIPE
+
 load_dotenv(verbose=True)
 myEmail = os.getenv("EMAIL")
 myCredential = os.getenv("CREDENTIAL")
 referenceNumber = os.getenv("REFERENCE_NUMBER")
+sendMail = False
 
 userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36"
 
@@ -42,12 +47,22 @@ with Session() as s:
 
     homepage = s.get(urlManage)
     homepage_content = bs(homepage.content, "html.parser")
-    
+
     pattern = re.compile(r'\"EstimateDelivery\":{([^}]+)}')
-    
     edd = homepage_content.find("script", text=pattern)
 
     if edd:
         match = pattern.search(edd.string)
         if match:
-            print(match.group(1))
+            if sendMail == False:
+                print(match.group(1))
+            else:
+                msg = MIMEText(match.group(1))
+                msg["From"] = myEmail
+                msg["To"] = myEmail
+                msg["Subject"] = match.group(1)
+                p = Popen(["/usr/sbin/sendmail", "-t", "-oi"], stdin=PIPE)
+                if sys.version_info >= (3,0):
+                    p.communicate(msg.as_bytes())
+                else:
+                    p.communicate(msg.as_string())

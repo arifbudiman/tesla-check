@@ -28,4 +28,4 @@ EMAIL_RESULT="False"
 
 `python ./check-edd.py `
 
-To check periodically, you can schedule (e.g. via cron) the script to run at a fixed interval (e.g. daily) and email you the result.
+To check periodically, you can schedule this (e.g. via cron) to run at a fixed interval (e.g. daily) and email you the result.

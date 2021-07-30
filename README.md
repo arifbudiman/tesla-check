@@ -2,6 +2,10 @@
 
 Checks the estimated delivery date for your Tesla order.
 
+## Requirements
+
+* [BeautifulSoup4](https://pypi.org/project/beautifulsoup4/)
+
 ## Getting Started
 
 After cloning the repo, create an environment variable file `.env` with a restrictive file permissions for the following variables:
@@ -19,10 +23,6 @@ EMAIL_RESULT="False"
 * CREDENTIAL: the password of your Tesla account.
 * REFERENCE_NUMBER: your Tesla order reservation number, usually starts with "RN".
 * EMAIL_RESULT: set to "False" to print the result, or "True" to email you the result.
-
-## Requirements
-
-* [BeautifulSoup4](https://pypi.org/project/beautifulsoup4/)
 
 ## Usage
 
